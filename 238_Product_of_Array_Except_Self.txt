@@ -1,0 +1,44 @@
+//************Brute Force Approach*****************//
+
+class Solution {
+public:
+    int product(vector<int>& nums,int skipper){
+        int pro = 1;
+        for(int i=0;i<nums.size();i++){
+            if(i==skipper){continue;}
+            pro *= nums[i];
+        }
+        
+        return pro;
+    }
+    vector<int> productExceptSelf(vector<int>& nums) {
+        vector<int> ans;
+        for(int i=0;i<nums.size();i++){
+            ans.push_back(product(nums,i));
+        }            
+        return ans;
+    }
+};
+
+
+//************Optimal Prefix Suffix Solution*****************//
+
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        vector<int> ans(nums.size());
+        int nl =nums.size();
+        int procount = 1;
+        ans[0] = procount;
+        for(int i=1;i<nl;i++){
+            procount *= nums[i-1];
+            ans[i] = procount;
+        }
+        procount = 1;
+        for(int i=nl-2;i>=0;i--){
+            procount *= nums[i+1];
+            ans[i] *= procount;
+        }
+        return ans;
+    }
+};
