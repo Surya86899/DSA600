@@ -1,0 +1,72 @@
+//************** Both have same TC and SC but no of lines differ**************//
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int totalprofit = 0;
+        int currentprofit = 0;
+        int profit = 0;
+        bool tadded = true;
+        // Base case where there is only 1 day we cannot buy or sell
+        if (prices.size() == 1) {
+            return totalprofit;
+        }
+
+        int i = 0, j = 1;
+        while (j < prices.size()) {
+            profit = prices[j] - prices[i];
+            if (profit < 0) {
+                i++;
+                j++;
+            } else {
+                if (currentprofit < profit) {
+                    currentprofit = profit;
+                    tadded = false;
+                    j++;
+                    while (j < prices.size()) {
+                        profit = prices[j] - prices[i];
+                        if (currentprofit > profit) {
+                            totalprofit += currentprofit;
+                            tadded = true;
+                            currentprofit = 0;
+                            i = j;
+                            j++;
+                            break;
+                        } else {
+                            currentprofit = profit;
+                            tadded = false;
+                            j++;
+                        }
+                    }
+                } else {
+                    totalprofit += currentprofit;
+                    tadded = true;
+                    currentprofit = 0;
+                    i = j;
+                    j++;
+                }
+            }
+        }
+
+        if (tadded == false) {
+            totalprofit += currentprofit;
+        }
+
+        return totalprofit;
+    }
+};
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int totalProfit = 0;
+
+        for (int i = 1; i < prices.size(); i++) {
+            if (prices[i] > prices[i - 1]) {
+                totalProfit += prices[i] - prices[i - 1];
+            }
+        }
+
+        return totalProfit;
+    }
+};
