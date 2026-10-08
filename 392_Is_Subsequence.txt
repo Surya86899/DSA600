@@ -1,0 +1,20 @@
+class Solution {
+public:
+    bool isSubsequence(string s, string t) {
+        int istarts=0,istartt=0;
+        while(istarts < s.size() && istartt < t.size()){
+            if(s[istarts] == t[istartt]){
+                istarts++;
+                istartt++;
+            }
+            else{
+                istartt++;
+            }
+        }
+        if(istarts == s.size())
+        { 
+            return true; 
+        }
+        return false;
+    }
+};
