@@ -1,0 +1,23 @@
+class Solution {
+public:
+
+    bool checkValid(string &s,string &goal,int pivot){
+        for(int i = 0;i<s.size()-pivot;i++){
+            if(s[pivot+i]!=goal[i]){return false;}
+        }
+        for(int i=0 ; i<pivot ;i++){
+            if(s[i]!=goal[s.size()-pivot+i]){return false;}
+        }
+        return true;
+    }
+    bool rotateString(string s, string goal) {
+        if (s.size()!=goal.size() ){return false;}
+        if (s.empty() && goal.empty()) {return true;}
+        for(int pivot=0;pivot<s.size();pivot++){
+            if(s[pivot] == goal[0]){ 
+                if(checkValid(s,goal,pivot)){return true;}
+            }
+        }
+        return false;
+    }
+};

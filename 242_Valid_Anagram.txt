@@ -1,0 +1,19 @@
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        if(s.size()!=t.size()){return false;}
+        int tracker[26] = {0};
+
+        for(char ch : s){
+            tracker[ch - 'a']++;
+        }
+        for(char ch : t){
+            tracker[ch - 'a']--;
+        }
+
+        for(int i:tracker){
+            if (i != 0) { return false;}
+        }
+        return true;
+    }
+};
